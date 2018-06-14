@@ -9,5 +9,5 @@
 (defn insert-feed [feed]
   (jdbc/insert! db-config :feeds feed))
 
-(defn get-feed-urls []
-  (map :feed_url (jdbc/query db-config ["SELECT feed_url FROM feeds"])))
+(defn get-feeds []
+  (jdbc/query db-config ["SELECT id, feed_url, title FROM feeds"]))

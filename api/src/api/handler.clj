@@ -6,7 +6,7 @@
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [ring.util.response :as ring-response]
-            [api.db :refer :all]
+            [api.db :as db]
             [api.feed-parser :refer :all]))
 
 (defn response
@@ -20,7 +20,7 @@
 
 (defn add-feed [body]
   (let [url (:url body)]
-    (insert-feed
+    (db/insert-feed
       (metadata
         url
         (parse-from-url url))))
@@ -29,8 +29,13 @@
 (defn get-feeds []
   (response
     (map
-      (comp (partial map parse-item) items parse-from-url)
-      (get-feed-urls))))
+      (fn [feed-metadata]
+        (into
+          feed-metadata
+          {:items
+           ((comp (partial map parse-item) items parse-from-url :feed_url)
+            feed-metadata)}))
+      (db/get-feeds))))
 
 (defroutes api-routes
   (context "/feeds" [] (defroutes feeds-routes
