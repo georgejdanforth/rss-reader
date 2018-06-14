@@ -1,0 +1,33 @@
+# Leiningen stuff
+/target
+/lib
+/classes
+/checkouts
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/.lein-*
+/.nrepl-port
+
+# Database files
+*.sqlite3
+*.db
+
+# Node
+.node_modules
+node_modules
+/node_modules
+*/node_modules
+/node_modules/*
+
+# Other
+*.swp
+*.log
+*.out
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.lnk
+*~
