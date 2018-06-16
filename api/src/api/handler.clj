@@ -3,6 +3,7 @@
             [compojure.route :as route]
             [cheshire.core :as json]
             [cheshire.parse :as parse]
+            [ring.middleware.cors :refer [wrap-cors]]
             [ring.middleware.defaults :refer [wrap-defaults api-defaults]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-body]]
             [ring.util.response :as ring-response]
@@ -44,7 +45,11 @@
   (route/not-found "Not Found"))
 
 (def api
-  (-> api-routes
-      (wrap-defaults api-defaults)
-      (wrap-json-body {:keywords? true})
-      (wrap-json-response)))
+  (routes
+    (-> #'api-routes
+        (wrap-cors :access-control-allow-origin [#".*"]
+                   :access-control-allow-credentials "true"
+                   :access-control-allow-methods [:get :put :post :delete])
+        (wrap-json-body {:keywords? true})
+        (wrap-json-response)
+        (wrap-defaults api-defaults))))
