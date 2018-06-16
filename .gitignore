@@ -10,6 +10,9 @@ pom.xml.asc
 /.lein-*
 /.nrepl-port
 
+# ClojureScript
+.rebel_readline_history
+
 # Database files
 *.sqlite3
 *.db
