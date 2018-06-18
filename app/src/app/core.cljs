@@ -1,23 +1,11 @@
 (ns app.core
   (:require [reagent.core :as r]
-            [app.http :as http]
             [ajax.core :as ajax]))
 
 ;; -------------------------
 ;; Setup
+
 (def feeds-url "http://localhost:3000/feeds")
-
-(def state (r/atom {:vals []}))
-
-;; -------------------------
-;; API Calls
-
-(defn get-feeds []
-  (ajax/GET feeds-url {:params {}
-                       :handler (fn [response] (println response) (reset! state response))
-                       :error-handler (fn [response] (prn response))
-                       :response-format :json
-                       :keywords? true}))
 
 ;; -------------------------
 ;; Views
@@ -33,7 +21,8 @@
       {:component-did-mount
        (fn []
          (ajax/GET feeds-url {:params {}
-                              :handler (fn [response] (reset! feed-data response))
+                              :handler
+                              (fn [response] (reset! feed-data response))
                               :error-handler (fn [response] (prn response))
                               :response-format :json
                               :keywords? true}))

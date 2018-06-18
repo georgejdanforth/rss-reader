@@ -10,6 +10,7 @@
                  [ring/ring-json "0.4.0"]
                  [cheshire "5.6.3"]
                  [clj-http "3.3.0"]
+                 [clj-time "0.14.4"]
                  [org.clojure/data.xml "0.0.8"]
                  [org.clojure/java.jdbc "0.7.6"]
                  [org.xerial/sqlite-jdbc "3.7.2"]]

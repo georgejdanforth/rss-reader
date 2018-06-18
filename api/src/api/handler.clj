@@ -29,14 +29,16 @@
 
 (defn get-feeds []
   (response
-    (map
-      (fn [feed-metadata]
-        (into
-          feed-metadata
-          {:items
-           ((comp (partial map parse-item) items parse-from-url :feed_url)
-            feed-metadata)}))
-      (db/get-feeds))))
+    (sort
+      pubdate-comp
+      (flatten
+        (map
+          (fn [metadata]
+            (map
+              #(into metadata %)
+              ((comp (partial map parse-item) items parse-from-url :feed_url)
+               metadata)))
+          (db/get-feeds))))))
 
 (defroutes api-routes
   (context "/feeds" [] (defroutes feeds-routes

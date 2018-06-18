@@ -1,6 +1,9 @@
 (ns api.feed-parser
   (:require [clojure.data.xml :as xml]
-           [clj-http.client :as http]))
+            [clojure.string :as string]
+            [clj-http.client :as http]
+            [clj-time.core :as clj-time]
+            [clj-time.format :as clj-time-format]))
 
 (defn text-content [element]
   (first (:content element)))
@@ -14,7 +17,7 @@
    :image {:column-name :image_url :parser image-url}})
 
 (def item-tag-info
-  {:title {:key :title :parser text-content}
+  {:title {:key :itemTitle :parser text-content}
    :link {:key :url :parser text-content}
    :description {:key :description :parser text-content}
    :pubDate {:key :pubDate :parser text-content}})
@@ -54,3 +57,11 @@
             (contains? item-tag-info (:tag element))
             (not-empty (:content element))))
         (:content item)))))
+
+(defn parse-pubdate [item]
+  (clj-time-format/parse
+    (clj-time-format/formatters :rfc822)
+    (string/replace (:pubDate item) #"GMT" "+0000")))
+
+(defn pubdate-comp [item-1 item-2]
+  (apply clj-time/after? (map parse-pubdate [item-1 item-2])))
