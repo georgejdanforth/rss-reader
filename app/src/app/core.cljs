@@ -12,7 +12,7 @@
 
 (defn feed-item [item]
   [:div {:key (:url item)}
-   [:h4 [:a {:href (:url item)} (:title item)]]
+   [:h4 [:a {:href (:url item)} (:itemTitle item)]]
    [:p (:description item)]])
 
 (defn home-page []
@@ -32,9 +32,8 @@
            (if (empty? @feed-data)
              [:h2 "Loading..."]
              [:div
-              (for [feed @feed-data]
-                (for [item (:items feed)]
-                  (feed-item item)))])])})))
+              (for [item @feed-data]
+                (feed-item item))])])})))
 
 ;; -------------------------
 ;; Initialize app
