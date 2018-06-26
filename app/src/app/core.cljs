@@ -1,6 +1,7 @@
 (ns app.core
   (:require [reagent.core :as r]
-            [ajax.core :as ajax]))
+            [ajax.core :as ajax]
+            [cljsjs.moment]))
 
 ;; -------------------------
 ;; Setup
@@ -11,8 +12,15 @@
 ;; Views
 
 (defn feed-item [item]
-  [:div {:key (:url item)}
-   [:h4 [:a {:href (:url item)} (:itemTitle item)]]
+  [:div {:class "card" :key (:url item)}
+   [:span
+    [:strong
+     [:a {:href (:siteUrl item)
+          :target "_blank"
+          :class "site-link"}
+      (:title item)]]
+    (str " - " (.fromNow (js/moment (:pubDate item))))]
+   [:h4 [:a {:href (:url item) :target "_blank"} (:itemTitle item)]]
    [:p (:description item)]])
 
 (defn home-page []
