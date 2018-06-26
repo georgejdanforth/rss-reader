@@ -36,7 +36,7 @@
           (fn [metadata]
             (map
               #(into metadata %)
-              ((comp (partial map parse-item) items parse-from-url :feed_url)
+              ((comp (partial map parse-item) items parse-from-url :feedUrl)
                metadata)))
           (db/get-feeds))))))
 
