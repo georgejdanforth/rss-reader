@@ -1,3 +1,5 @@
+@import 'bulma.css';
+
 body {
   font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
   max-width: 600px;
@@ -31,14 +33,6 @@ a {
 
 a:hover {
   text-decoration: underline;
-}
-
-.card {
-  padding: 15px;
-  margin: 15px 0px 15px 0px;
-  -webkit-box-shadow: -1px 3px 8px -1px rgba(153,153,153,1);
-  -moz-box-shadow: -1px 3px 8px -1px rgba(153,153,153,1);
-  box-shadow: -1px 3px 8px -1px rgba(153,153,153,1);
 }
 
 a.site-link {

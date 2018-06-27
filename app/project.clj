@@ -35,7 +35,9 @@
                          :asset-path   "js/out"
                          :source-map true
                          :optimizations :none
-                         :pretty-print  true}
+                         :pretty-print  true
+                         :npm-deps {:bulma "0.7.1"}
+                         :install-deps true}
                         :figwheel
                         {:on-jsload "app.core/mount-root"
                          :open-urls ["http://localhost:3449/index.html"]}}
