@@ -12,16 +12,18 @@
 ;; Views
 
 (defn feed-item [item]
-  [:div {:class "card" :key (:url item)}
-   [:span
-    [:strong
-     [:a {:href (:siteUrl item)
-          :target "_blank"
-          :class "site-link"}
-      (:title item)]]
-    (str " - " (.fromNow (js/moment (:pubDate item))))]
-   [:h4 [:a {:href (:url item) :target "_blank"} (:itemTitle item)]]
-   [:p (:description item)]])
+  [:div {:class "card feed-item" :key (:url item)}
+   [:header {:class "card-header"}
+     [:p {:class "card-header-title"}
+      [:a {:href (:siteUrl item)
+           :target "_blank"
+           :class "site-link"}
+       (:title item)]
+      [:span {:class "has-text-weight-light"}
+       (str " - " (.fromNow (js/moment (:pubDate item))))]]]
+   [:div {:class "card-content"}
+    [:h4 [:a {:href (:url item) :target "_blank"} (:itemTitle item)]]
+    [:div {:class "content"} [:p (:description item)]]]])
 
 (defn home-page []
   (let [feed-data (r/atom [])]

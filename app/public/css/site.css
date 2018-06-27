@@ -1,13 +1,13 @@
 @import 'bulma.css';
 
 body {
-  font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif;
+  /* font-family: 'Helvetica Neue', Verdana, Helvetica, Arial, sans-serif; */
   max-width: 600px;
   margin: 0 auto;
   padding-top: 72px;
   -webkit-font-smoothing: antialiased;
-  font-size: 1.125em;
-  color: #333;
+  /* font-size: 1.125em; */
+  /* color: #333; */
   line-height: 1.5em;
 }
 
@@ -33,8 +33,13 @@ a {
 
 a:hover {
   text-decoration: underline;
+  color: #09f;
 }
 
 a.site-link {
-    color: black;
+  color: black;
+}
+
+.feed-item {
+  margin: 15px 0px 15px 0px;
 }
