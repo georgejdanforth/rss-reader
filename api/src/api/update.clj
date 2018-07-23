@@ -6,9 +6,7 @@
   (let [feed-urls (db/get-feed-urls)]
     (zipmap
       (map :id feed-urls)
-      (map
-        #((comp (partial map parse-item) items parse-from-url) %)
-        (map :feed_url feed-urls)))))
+      (map parse-full-feed (map :feed_url feed-urls)))))
 
 (defn -main
   [& args]

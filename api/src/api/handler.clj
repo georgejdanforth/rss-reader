@@ -34,10 +34,7 @@
       (flatten
         (map
           (fn [metadata]
-            (map
-              #(into metadata %)
-              ((comp (partial map parse-item) items parse-from-url :feedUrl)
-               metadata)))
+            (map #(into metadata %) (parse-full-feed (:feedUrl metadata))))
           (db/get-feeds))))))
 
 (defroutes api-routes

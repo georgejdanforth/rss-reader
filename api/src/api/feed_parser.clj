@@ -58,6 +58,9 @@
             (not-empty (:content element))))
         (:content item)))))
 
+(defn parse-full-feed [url]
+  ((comp (partial map parse-item) items parse-from-url) url))
+
 (defn parse-pubdate [item]
   (clj-time-format/parse
     (clj-time-format/formatters :rfc822)
