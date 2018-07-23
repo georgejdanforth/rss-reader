@@ -13,7 +13,8 @@
                  [clj-time "0.14.4"]
                  [org.clojure/data.xml "0.0.8"]
                  [org.clojure/java.jdbc "0.7.6"]
-                 [org.xerial/sqlite-jdbc "3.7.2"]]
+                 [org.xerial/sqlite-jdbc "3.7.2"]
+                 [clj-postgresql "0.7.0"]]
   :plugins [[lein-ring "0.9.7"]]
   :ring {:handler api.handler/api}
   :profiles

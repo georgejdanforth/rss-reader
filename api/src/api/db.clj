@@ -1,11 +1,14 @@
 (ns api.db
-  (:require [clojure.java.jdbc :as jdbc]
+  (:require [clj-postgresql.core :as pg]
+            [clojure.java.jdbc :as jdbc]
             [clojure.set :refer [rename-keys]]))
 
 (def db-config
-  {:classname "org.sqlite.JDBC"
-   :subprotocol "sqlite"
-   :subname "db/database.db"})
+  (pg/spec
+    :host "localhost"
+    :user "georgejdanforth"
+    :dbname "rss_db"
+    :port 5432))
 
 (def feed-camel-case-keys
   {:feed_url :feedUrl
