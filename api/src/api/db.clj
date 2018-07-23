@@ -22,3 +22,6 @@
   (map
     #(rename-keys % feed-camel-case-keys)
     (jdbc/query db-config ["SELECT id, feed_url, site_url, title FROM feeds"])))
+
+(defn get-feed-urls []
+  (jdbc/query db-config ["SELECT id, feed_url FROM feeds"]))
