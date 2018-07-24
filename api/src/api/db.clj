@@ -1,5 +1,6 @@
 (ns api.db
   (:require [clj-postgresql.core :as pg]
+            [clj-postgresql.types]
             [clojure.java.jdbc :as jdbc]
             [clojure.set :refer [rename-keys]]))
 
@@ -25,3 +26,10 @@
 
 (defn get-feed-urls []
   (jdbc/query db-config ["SELECT id, feed_url FROM feeds"]))
+
+(defn get-cache [id]
+  (:cache
+    (jdbc/query db-config ["SELECT cache FROM feeds WHERE id = ?" id])))
+
+(defn update-cache [[id cache-val]]
+  (jdbc/update! db-config :feeds {:cache cache-val} ["id = ?" id]))

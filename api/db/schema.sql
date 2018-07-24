@@ -3,5 +3,6 @@ CREATE TABLE feeds (
     "feed_url" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "site_url" TEXT NOT NULL,
-    "image_url" TEXT
+    "image_url" TEXT,
+    "cache" JSON
 );
